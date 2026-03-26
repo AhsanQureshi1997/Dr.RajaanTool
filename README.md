@@ -1,35 +1,24 @@
-# TIPS Outcome Risk Analyzer
+# TIPS Outcome Risk Analyzer — GitHub Pages version
 
-A Streamlit prototype based on the study workflow used in pre-TIPS diastolic dysfunction research.
+This is a static browser-based version of the TIPS Outcome Risk Analyzer that can be hosted on GitHub Pages.
+
+## Files
+- `index.html`
+- `styles.css`
+- `script.js`
 
 ## What it does
-- Accepts a CSV of patient-level pre-TIPS variables and outcomes
-- Classifies diastolic dysfunction using the core 2020 CCM marker set
-- Compares early post-TIPS outcomes in DD vs non-DD cohorts
-- Runs simple logistic regression for exploratory analysis
+- Uploads a CSV of patient-level pre-TIPS variables and outcomes
+- Classifies diastolic dysfunction using the default 3-of-4 rule
+- Compares DD vs non-DD outcomes
+- Runs a browser-based exploratory logistic regression
 - Exports the analyzed dataset
 
-## Run locally
-```bash
-pip install -r requirements.txt
-streamlit run app.py
-```
+## Deploy on GitHub Pages
+1. Push these files to your repository root, or to a `/docs` folder.
+2. In GitHub, go to **Settings → Pages**.
+3. Under **Build and deployment**, choose **Deploy from a branch**.
+4. Select your branch and the folder that contains `index.html`.
+5. Save.
 
-## Required columns
-- patient_id
-- age
-- sex
-- hypertension
-- masld
-- beta_blocker
-- septal_e_prime
-- e_over_e_prime
-- lavi
-- trv
-- cv_event
-- renal_dysfunction
-- liver_dysfunction
-- mortality
-
-## Important note
-This is a research workflow prototype, not clinical decision support and not validated for patient care.
+GitHub Pages will then publish the site.

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TIPS Outcome Risk Analyzer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">GitHub Pages research app</div>
+        <h1>TIPS Outcome Risk Analyzer</h1>
+        <p class="lead">
+          Browser-based tool built around the workflow used in pre-TIPS diastolic dysfunction studies.
+          Upload a CSV, classify diastolic dysfunction, compare outcomes, run exploratory logistic regression,
+          and export the analyzed dataset.
+        </p>
+      </div>
+      <div class="header-actions">
+        <button id="loadDemoBtn" class="primary">Load demo dataset</button>
+        <button id="downloadDemoBtn" class="secondary">Download demo CSV</button>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Clinical basis</h2>
+      <p>
+        This tool uses the core echo markers often applied in cirrhotic cardiomyopathy and post-TIPS outcome work:
+        septal e′, E/e′, left atrial volume index, and tricuspid regurgitation velocity.
+        The default rule classifies diastolic dysfunction when at least 3 of the 4 criteria are abnormal.
+      </p>
+    </section>
+
+    <section class="grid two">
+      <section class="card">
+        <h2>Data source</h2>
+        <label class="file-upload">
+          <span>Upload CSV</span>
+          <input type="file" id="csvFile" accept=".csv" />
+        </label>
+        <p class="muted">Or load the built-in demo dataset.</p>
+        <details>
+          <summary>Required columns</summary>
+          <ul class="cols" id="requiredCols"></ul>
+        </details>
+      </section>
+
+      <section class="card">
+        <h2>DD rule thresholds</h2>
+        <div class="controls">
+          <label>septal e′ abnormal if below <input type="number" id="septalThr" step="0.1" value="7.0"></label>
+          <label>E/e′ abnormal if above <input type="number" id="eeThr" step="0.1" value="15.0"></label>
+          <label>LAVI abnormal if above <input type="number" id="laviThr" step="0.5" value="34.0"></label>
+          <label>TRV abnormal if above <input type="number" id="trvThr" step="0.1" value="2.8"></label>
+          <label>Classify DD if at least this many criteria are abnormal
+            <input type="range" id="ruleCount" min="1" max="4" step="1" value="3">
+            <span id="ruleCountLabel">3</span>
+          </label>
+        </div>
+        <button id="recalcBtn" class="primary">Recalculate analysis</button>
+      </section>
+    </section>
+
+    <section id="message" class="message hidden"></section>
+
+    <section class="grid four metrics" id="metrics"></section>
+
+    <section class="card">
+      <h2>Analyzed cohort preview</h2>
+      <div class="table-wrap"><table id="previewTable"></table></div>
+    </section>
+
+    <section class="grid two">
+      <section class="card">
+        <h2>Marker distribution</h2>
+        <div class="table-wrap"><table id="markerTable"></table></div>
+      </section>
+
+      <section class="card">
+        <h2>Outcome comparison: DD vs non-DD</h2>
+        <div class="table-wrap"><table id="outcomeTable"></table></div>
+      </section>
+    </section>
+
+    <section class="card">
+      <h2>Simple logistic regression</h2>
+      <div class="controls inline">
+        <label>Outcome
+          <select id="outcomeChoice"></select>
+        </label>
+      </div>
+      <div>
+        <div class="muted">Predictors</div>
+        <div id="predictorChoices" class="checkbox-grid"></div>
+      </div>
+      <div class="actions-row">
+        <button id="runModelBtn" class="primary">Run model</button>
+      </div>
+      <div class="table-wrap"><table id="regressionTable"></table></div>
+      <p class="muted">
+        This is an exploratory browser-based regression module. Formal study analysis should still be reviewed and validated by the research team.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Downloads</h2>
+      <div class="actions-row">
+        <button id="downloadAnalyzedBtn" class="primary">Download analyzed dataset</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
